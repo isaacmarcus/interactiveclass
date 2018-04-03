@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,9 +22,11 @@ public class LoginActivity extends AppCompatActivity {
     private EditText Password;
     private Button Login;
 
-    private DatabaseReference fbstudentID;
-    private DatabaseReference fbPassword;
-    private DatabaseReference fbRank;
+    private static DatabaseReference fbstudentID;
+    private static DatabaseReference fbPassword;
+    private static DatabaseReference fbRank;
+
+    private static String dataRank;
 
     public static final String MY_PREF = "MyPref";
     public static final String KEY = "Username";
@@ -51,16 +52,16 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void validate(final String username, final String password){
+    public void validate(final String username, final String password) {
         fbstudentID = FirebaseDatabase.getInstance().getReference().child("Users").child(username.toString()).child("StudentID");
         fbPassword = FirebaseDatabase.getInstance().getReference().child("Users").child(username.toString()).child("Password");
         fbRank = FirebaseDatabase.getInstance().getReference().child("Users").child(username.toString()).child("Rank");
 
-        final String[] dataRank = new String[1];
+        //final String[] dataRank = new String[1];
         fbRank.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                dataRank[0] = dataSnapshot.getValue().toString();
+                dataRank = dataSnapshot.getValue().toString();
             }
 
             @Override
@@ -72,18 +73,18 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String dataPassword = dataSnapshot.getValue().toString();
-                if (password.equals(dataPassword)){
+                if (password.equals(dataPassword)) {
                     SharedPreferences sharedPreferences = getSharedPreferences(MY_PREF, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString(KEY,username);
+                    editor.putString(KEY, username);
                     editor.apply();
 
-                    if (dataRank[0].equals("teacher")) {
+                    if (dataRank.equals("teacher")) {
                         Toast.makeText(LoginActivity.this, "TEACHER LOGIN", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(LoginActivity.this,TeacherActivity.class));
-                    } else if (dataRank[0].equals("student")) {
+                        startActivity(new Intent(LoginActivity.this, TeacherActivity.class));
+                    } else if (dataRank.equals("student")) {
                         Toast.makeText(LoginActivity.this, "STUDENT LOGIN", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(LoginActivity.this,StudentActivity.class));
+                        startActivity(new Intent(LoginActivity.this, StudentActivity.class));
                     }
                 } else {
                     Toast.makeText(LoginActivity.this, "Wrong User ID/Password", Toast.LENGTH_SHORT).show();
@@ -97,5 +98,48 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    static boolean returnVal=false;
+
+    public static boolean validateTest(final String username, final String password) {
+        fbstudentID = FirebaseDatabase.getInstance().getReference().child("Users").child(username.toString()).child("StudentID");
+        fbPassword = FirebaseDatabase.getInstance().getReference().child("Users").child(username.toString()).child("Password");
+        fbRank = FirebaseDatabase.getInstance().getReference().child("Users").child(username.toString()).child("Rank");
+
+        //final String[] dataRank = new String[1];
+        fbRank.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                dataRank = dataSnapshot.getValue().toString();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+        fbPassword.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String dataPassword = dataSnapshot.getValue().toString();
+                if (password.equals(dataPassword)) {
+                    if (dataRank.equals("teacher")) {
+                        returnVal = true;
+                    } else if (dataRank.equals("student")) {
+                        returnVal = true;
+                    }
+                } else {
+                    returnVal = false;
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        return returnVal;
     }
 }
