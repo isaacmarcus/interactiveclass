@@ -1,6 +1,7 @@
 package com.example.zwanzigdrei.interactiveclass;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -60,6 +61,16 @@ public class CourseActivity extends AppCompatActivity {
         });
 
         mUpdater.run();
+
+        Button uploadBtn = findViewById(R.id.btnUpload);
+
+        uploadBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(CourseActivity.this, UploadActivity.class);
+                startActivity(i);
+            }
+        });
 
     }
 
@@ -138,6 +149,9 @@ public class CourseActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private String message;
+    private AlertDialog.Builder builder;
+
     private class MyListAdaper extends ArrayAdapter<String> {
         private int layout;
         private List<String> mObjects;
@@ -146,8 +160,8 @@ public class CourseActivity extends AppCompatActivity {
             mObjects = objects;
             layout = resource;
         }
-        //AlertDialog.Builder builder1;
-        //String message = "";
+
+
         @Override
         public View getView(final int position, View convertView, ViewGroup parent) {
             final ViewHolder mainViewholder;
@@ -164,18 +178,21 @@ public class CourseActivity extends AppCompatActivity {
             mainViewholder.button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+
                     Toast.makeText(getContext(), "Displaying student's records ...", Toast.LENGTH_SHORT).show();
 
-                    AlertDialog.Builder builder1 = new AlertDialog.Builder(CourseActivity.this);
+                    builder = new AlertDialog.Builder(CourseActivity.this);
+                    message = "";
                     displayRecords(mainViewholder.title.getText().toString());
-                    String message = "";
-                    for (String i:recordList) {
-                        message += i +"\n";
-                    }
 
-                    builder1.setMessage(message);
-                    builder1.setCancelable(true);
-                    builder1.setPositiveButton(
+//                    for (String i:recordList) {
+//                        message += i +"\n";
+//                    }
+
+                    builder.setMessage(recordList.toString());
+                    builder.setCancelable(true);
+                    builder.setPositiveButton(
                             "OK",
                             new DialogInterface.OnClickListener() {
                                 @Override
@@ -183,7 +200,7 @@ public class CourseActivity extends AppCompatActivity {
                                     dialog.cancel();
                                 }
                             });
-                    AlertDialog alert11 = builder1.create();
+                    AlertDialog alert11 = builder.create();
                     alert11.show();
 
                     Handler handler = new Handler();
@@ -206,11 +223,11 @@ public class CourseActivity extends AppCompatActivity {
         Button button;
     }
 
-    ArrayList<String> recordList = new ArrayList<>();
+    ArrayList<String> recordList;
 
     public void displayRecords(String studentID) {
+        recordList = new ArrayList<>();
         stddataRef = FirebaseDatabase.getInstance().getReference().child("Computer System Engineering").child("Week 1").child(studentID);
-        //recordList = new ArrayList<>();
         stddataRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -220,6 +237,7 @@ public class CourseActivity extends AppCompatActivity {
                     String recordVal = record.getKey() + ": " + record.getValue().toString();
                     //Toast.makeText(CourseActivity.this, recordVal, Toast.LENGTH_SHORT).show();
                     recordList.add(recordVal);
+                    message += recordVal +"\n";
                 }
             }
 

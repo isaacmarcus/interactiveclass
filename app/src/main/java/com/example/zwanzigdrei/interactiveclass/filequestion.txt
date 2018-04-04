@@ -1,0 +1,11 @@
+Which part of the plant holds it in the soil?
+This part of the plant absorbs energy from the sun.
+This part of the plant attracts bees, butterflies and hummingbirds.
+The _______ holds the plant upright.
+
+Roots,Stem,Flower
+Fruit,Leaves,Seeds
+Bark,Flower,Roots
+Flower,Leaves,Stem
+
+Roots,Leaves,Flower,Stem

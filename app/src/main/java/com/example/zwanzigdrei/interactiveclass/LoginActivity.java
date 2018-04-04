@@ -18,6 +18,8 @@ import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
 
+    Bundle bundle = new Bundle();
+
     private EditText Username;
     private EditText Password;
     private Button Login;
@@ -62,6 +64,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 dataRank = dataSnapshot.getValue().toString();
+                bundle.putString("rank",dataRank); // store rank into bundle to move across intent
+                bundle.putString("username", fbstudentID.toString()); // store username into bundle to move across intent
             }
 
             @Override
@@ -78,13 +82,15 @@ public class LoginActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString(KEY, username);
                     editor.apply();
+                    Intent mainInt = new Intent(LoginActivity.this, MainActivity.class);
+                    mainInt.putExtras(bundle);
 
                     if (dataRank.equals("teacher")) {
                         Toast.makeText(LoginActivity.this, "TEACHER LOGIN", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(LoginActivity.this, TeacherActivity.class));
+                        startActivity(mainInt);
                     } else if (dataRank.equals("student")) {
                         Toast.makeText(LoginActivity.this, "STUDENT LOGIN", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(LoginActivity.this, StudentActivity.class));
+                        startActivity(mainInt);
                     }
                 } else {
                     Toast.makeText(LoginActivity.this, "Wrong User ID/Password", Toast.LENGTH_SHORT).show();

@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,6 +33,15 @@ import java.util.ArrayList;
 
 public class MainFragment extends Fragment {
 
+    private String username;
+    private String rank;
+
+    private TextView usernameTV;
+    private TextView studentidTV;
+    private TextView gradeTV;
+    private TextView attendanceTV;
+    private TextView performanceTV;
+
     public MainFragment() {
         // Required empty public constructor
     }
@@ -41,6 +51,8 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        username = getArguments().getString("username");
+        rank = getArguments().getString("rank");
         return inflater.inflate(R.layout.fragment_main, container, false);
 
     }
