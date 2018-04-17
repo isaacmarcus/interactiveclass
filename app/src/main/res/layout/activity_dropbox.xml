@@ -10,10 +10,10 @@
     <Button
         android:id="@+id/upload"
         android:layout_width="176dp"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="104dp"
         android:layout_marginTop="100dp"
-        android:text="Upload Slides"
+        android:text="Upload Search"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginLeft="104dp" />
@@ -21,10 +21,10 @@
     <Button
         android:id="@+id/uploadapp"
         android:layout_width="176dp"
-        android:layout_height="51dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="104dp"
         android:layout_marginTop="16dp"
-        android:text="Upload From selected App"
+        android:text="Upload From Recent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/upload"
         android:layout_marginLeft="104dp" />
@@ -32,7 +32,7 @@
     <Button
         android:id="@+id/button20"
         android:layout_width="174dp"
-        android:layout_height="51dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="104dp"
         android:layout_marginTop="16dp"
         android:text="View Weeks"

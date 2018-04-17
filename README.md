@@ -7,5 +7,9 @@ Uploading of MCQ test through a text file.
 MCQ testing for students 
 
 *Unimplemented Features*
-Feedback for lessons through application
-Storage of student’s score into their database.
+nil
+
+*Things to do:
+Upload the txt file with specific title (e.g englishquestion) and format onto the sd card of the device.
+Ensure that application permissions for storage are enabled (this is for quizzing to work)
+
