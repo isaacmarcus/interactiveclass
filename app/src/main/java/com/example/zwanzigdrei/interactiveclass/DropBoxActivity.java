@@ -1,4 +1,4 @@
-package com.example.zwanzigdrei.interactiveclass;
+package mynamechef.dropboxtest;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,7 +16,6 @@ import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.ProgressListener;
 import com.dropbox.client2.android.AndroidAuthSession;
 import com.dropbox.client2.session.AppKeyPair;
-import com.github.barteksc.pdfviewer.PDFView;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,13 +23,12 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 
-public class UploadActivity extends AppCompatActivity {
+public class DropBoxActivity extends AppCompatActivity {
 
     public static Button upload;
     public static Button download;
     public static Button uploadApp;
-    public static Button createFolder;
-    public static PDFView pdfview;
+    public static Button test;
 
     public String path = Environment.DIRECTORY_DOWNLOADS;//Environment.getExternalStorageDirectory().getAbsolutePath();
     public File Dir = new File(path);
@@ -38,22 +36,12 @@ public class UploadActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_upload);
+        setContentView(R.layout.activity_dropbox);
 
         upload = (Button)findViewById(R.id.upload);
         download = (Button) findViewById(R.id.download);
         uploadApp = (Button)findViewById(R.id.uploadapp);
-        createFolder = (Button)findViewById(R.id.button);
-        PDFView pdfView = (PDFView)findViewById(R.id.pdfView);
-        pdfView.fromAsset("Augustine--Confessions.pdf").load();
-
-        createFolder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                UploadToDropboxFromPath(path + "filequestion.txt", "ProjectSIC_Test_Folder/testFile.pdf");
-            }
-        });
-
+        test = (Button)findViewById(R.id.button20);
 
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,9 +60,19 @@ public class UploadActivity extends AppCompatActivity {
         download.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DownloadFromDropboxFromPath(path + "downloadFileFromDropbox", "ProjectSIC_Test_Folder/testFile.pdf");
+                DownloadFromDropboxFromPath(path + "downloadFileFromDropbox", "ProjectSIC_Test_Folder/week2class1s.pdf");
             }
         });
+
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(DropBoxActivity.this, WeekSelectionActivity.class);
+                startActivity(myIntent);
+            }
+        });
+
+
 
         AndroidAuthSession session = buildSession();
         dropboxAPI = new DropboxAPI<AndroidAuthSession>(session);
@@ -204,7 +202,7 @@ public class UploadActivity extends AppCompatActivity {
                         @Override
                         public void run()
                         {
-                            UploadToDropboxFromPath(pathFrom, "/db-test/" + DropboxUploadName + pathFrom.substring(pathFrom.lastIndexOf('.')));
+                            UploadToDropboxFromPath(pathFrom, "/ProjectSIC_Test_Folder/" + DropboxUploadName + pathFrom.substring(pathFrom.lastIndexOf('.')));
                             Toast.makeText(getApplicationContext(), "File successfully uploaded.", Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -228,7 +226,7 @@ public class UploadActivity extends AppCompatActivity {
                         final File file = new File(DropboxUploadPathFrom);
                         InputStream inputStream = getContentResolver().openInputStream(uri);
 
-                        dropboxAPI.putFile("/db-test/" + DropboxUploadName + file.getName().substring(file.getName().lastIndexOf("."),
+                        dropboxAPI.putFile("/ProjectSIC_Test_Folder/" + DropboxUploadName + file.getName().substring(file.getName().lastIndexOf("."),
                                 file.getName().length()), inputStream, file.length(), null, new ProgressListener(){
                             @Override
                             public long progressInterval() {return 100;}

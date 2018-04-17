@@ -1,0 +1,11 @@
+This part of the plant gets energy from the sun.
+Which part of the plant keeps it in the soil?
+This part of the plant attracts bees.
+The __________ keeps the plant upright.
+
+Fruit,Leaves,Seeds
+Roots,Stem,Flower
+Bark,Flower,Roots
+Flower,Leaves,Stem
+
+Leaves,Roots,Flower,Stem

@@ -32,7 +32,7 @@ import com.google.firebase.database.ValueEventListener;
 public class CourseActivity extends AppCompatActivity {
 
     // Get a reference to the database service
-    private DatabaseReference dataCourse= FirebaseDatabase.getInstance().getReference().child("Computer System Engineering").child("Week 1");
+    private DatabaseReference dataCourse= FirebaseDatabase.getInstance().getReference().child("Subjects").child("Computer Systems Engineering").child("Week 1");
     private DatabaseReference stddataRef;
 
     private ArrayList<String> data = new ArrayList<>();
