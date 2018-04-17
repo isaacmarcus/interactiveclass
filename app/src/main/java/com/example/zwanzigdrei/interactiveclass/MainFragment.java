@@ -33,14 +33,11 @@ import java.util.ArrayList;
 
 public class MainFragment extends Fragment {
 
-    private String username;
+    private String studentID;
     private String rank;
 
-    private TextView usernameTV;
     private TextView studentidTV;
-    private TextView gradeTV;
-    private TextView attendanceTV;
-    private TextView performanceTV;
+    private TextView rankTV;
 
     public MainFragment() {
         // Required empty public constructor
@@ -51,10 +48,18 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        username = getArguments().getString("username");
-        rank = getArguments().getString("rank");
-        return inflater.inflate(R.layout.fragment_main, container, false);
+        View view = inflater.inflate(R.layout.fragment_main,container,false);
 
+        studentID = getArguments().getString("studentID");
+        rank = getArguments().getString("rank");
+
+        studentidTV = view.findViewById(R.id.studentid);
+        rankTV = view.findViewById(R.id.rank);
+
+        studentidTV.setText("ID: " + studentID);
+        rankTV.setText("Rank: " + rank);
+
+        return view;
     }
 
 

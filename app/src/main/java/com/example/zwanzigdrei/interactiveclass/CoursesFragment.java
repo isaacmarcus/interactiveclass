@@ -75,7 +75,7 @@ public class CoursesFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent();
-                i.setClass(getActivity(),CourseActivity.class);
+                i.setClass(getActivity(),DropBoxActivity.class);
                 getActivity().startActivity(i);
             }
         });

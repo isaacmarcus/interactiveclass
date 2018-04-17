@@ -1,4 +1,4 @@
-package mynamechef.dropboxtest;
+package com.example.zwanzigdrei.interactiveclass;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,12 +11,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
 import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.ProgressListener;
 import com.dropbox.client2.android.AndroidAuthSession;
 import com.dropbox.client2.session.AppKeyPair;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -25,12 +23,13 @@ import java.io.InputStream;
 
 public class DropBoxActivity extends AppCompatActivity {
 
+    private Bundle bundle;
+
     public static Button upload;
-    public static Button download;
     public static Button uploadApp;
     public static Button test;
 
-    public String path = Environment.DIRECTORY_DOWNLOADS;//Environment.getExternalStorageDirectory().getAbsolutePath();
+    public String path = Environment.getExternalStorageDirectory().getAbsolutePath();
     public File Dir = new File(path);
 
     @Override
@@ -38,10 +37,16 @@ public class DropBoxActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dropbox);
 
-        upload = (Button)findViewById(R.id.upload);
-        download = (Button) findViewById(R.id.download);
-        uploadApp = (Button)findViewById(R.id.uploadapp);
-        test = (Button)findViewById(R.id.button20);
+        upload = findViewById(R.id.upload);
+        uploadApp = findViewById(R.id.uploadapp);
+        test = findViewById(R.id.button20);
+
+        bundle = LoginActivity.bundle;
+        String rank = bundle.getString("rank");
+        if (!rank.equals("teacher")) { // this is to make sure students cannot upload slides
+            upload.setVisibility(View.GONE);
+            uploadApp.setVisibility(View.GONE);
+        }
 
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,12 +62,6 @@ public class DropBoxActivity extends AppCompatActivity {
             }
         });
 
-        download.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DownloadFromDropboxFromPath(path + "downloadFileFromDropbox", "ProjectSIC_Test_Folder/week2class1s.pdf");
-            }
-        });
 
         test.setOnClickListener(new View.OnClickListener() {
             @Override

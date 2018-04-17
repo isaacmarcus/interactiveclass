@@ -4,6 +4,7 @@ package com.example.zwanzigdrei.interactiveclass;
  * Created by mengyuan on 4/3/2018.
  */
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,7 +16,12 @@ import java.io.FileNotFoundException;
 
 public class QuizActivity extends AppCompatActivity {
 
-    private QuestionLibrary mQuestionLibrary = new QuestionLibrary();
+
+    String filename;
+
+    QuestionLibrary mQuestionLibrary;
+
+
 
     private TextView mScoreView;
     private TextView mQuestionView;
@@ -27,8 +33,9 @@ public class QuizActivity extends AppCompatActivity {
     private int mScore = 0;
     private int mQuestionNumber = 0;
 
-//    public QuizActivity() throws FileNotFoundException {
-//    }
+    public QuizActivity() throws FileNotFoundException {
+    }
+
 
 
     @Override
@@ -36,81 +43,96 @@ public class QuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
-        mScoreView = (TextView)findViewById(R.id.score);
-        mQuestionView = (TextView)findViewById(R.id.question);
-        mButtonChoice1 = (Button)findViewById(R.id.choice1);
-        mButtonChoice2 = (Button)findViewById(R.id.choice2);
-        mButtonChoice3 = (Button)findViewById(R.id.choice3);
+        Intent intent = getIntent();
+        filename = intent.getStringExtra("question");
 
-        updateQuestion();
 
-        //Start of Button Listener for Button1
-        mButtonChoice1.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                //My logic for Button goes in here
+        try {
 
-                if (mButtonChoice1.getText().toString().equals(mAnswer)){
-                    mScore = mScore + 1;
-                    updateScore(mScore);
-                    updateQuestion();
-                    //This line of code is optiona
-                    Toast.makeText(QuizActivity.this, "correct", Toast.LENGTH_SHORT).show();
 
-                }else {
-                    Toast.makeText(QuizActivity.this, "wrong", Toast.LENGTH_SHORT).show();
-                    updateQuestion();
+            mQuestionLibrary = new QuestionLibrary(filename);
+
+
+            mScoreView = (TextView) findViewById(R.id.score);
+            mQuestionView = (TextView) findViewById(R.id.question);
+            mButtonChoice1 = (Button) findViewById(R.id.choice1);
+            mButtonChoice2 = (Button) findViewById(R.id.choice2);
+            mButtonChoice3 = (Button) findViewById(R.id.choice3);
+
+
+            updateQuestion();
+
+            //Start of Button Listener for Button1
+            mButtonChoice1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //My logic for Button goes in here
+
+                    if (mButtonChoice1.getText().toString().equals(mAnswer)) {
+                        mScore = mScore + 1;
+                        updateScore(mScore);
+                        updateQuestion();
+                        //This line of code is optiona
+                        Toast.makeText(QuizActivity.this, "Correct", Toast.LENGTH_SHORT).show();
+
+                    } else {
+                        Toast.makeText(QuizActivity.this, "Wrong", Toast.LENGTH_SHORT).show();
+                        updateQuestion();
+                    }
                 }
-            }
-        });
+            });
 
-        //End of Button Listener for Button1
+            //End of Button Listener for Button1
 
-        //Start of Button Listener for Button2
-        mButtonChoice2.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                //My logic for Button goes in here
+            //Start of Button Listener for Button2
+            mButtonChoice2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //My logic for Button goes in here
 
-                if (mButtonChoice2.getText().toString().equals(mAnswer)){
-                    mScore = mScore + 1;
-                    updateScore(mScore);
-                    updateQuestion();
-                    //This line of code is optiona
-                    Toast.makeText(QuizActivity.this, "correct", Toast.LENGTH_SHORT).show();
+                    if (mButtonChoice2.getText().toString().equals(mAnswer)) {
+                        mScore = mScore + 1;
+                        updateScore(mScore);
+                        updateQuestion();
+                        //This line of code is optiona
+                        Toast.makeText(QuizActivity.this, "correct", Toast.LENGTH_SHORT).show();
 
-                }else {
-                    Toast.makeText(QuizActivity.this, "wrong", Toast.LENGTH_SHORT).show();
-                    updateQuestion();
+                    } else {
+                        Toast.makeText(QuizActivity.this, "wrong", Toast.LENGTH_SHORT).show();
+                        updateQuestion();
+                    }
                 }
-            }
-        });
+            });
 
-        //End of Button Listener for Button2
+            //End of Button Listener for Button2
 
 
-        //Start of Button Listener for Button3
-        mButtonChoice3.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                //My logic for Button goes in here
+            //Start of Button Listener for Button3
+            mButtonChoice3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //My logic for Button goes in here
 
-                if (mButtonChoice3.getText().toString().equals(mAnswer)){
-                    mScore = mScore + 1;
-                    updateScore(mScore);
-                    updateQuestion();
-                    //This line of code is optiona
-                    Toast.makeText(QuizActivity.this, "correct", Toast.LENGTH_SHORT).show();
+                    if (mButtonChoice3.getText().toString().equals(mAnswer)) {
+                        mScore = mScore + 1;
+                        updateScore(mScore);
+                        updateQuestion();
+                        //This line of code is optiona
+                        Toast.makeText(QuizActivity.this, "correct", Toast.LENGTH_SHORT).show();
 
-                }else {
-                    Toast.makeText(QuizActivity.this, "wrong", Toast.LENGTH_SHORT).show();
-                    updateQuestion();
+                    } else {
+                        Toast.makeText(QuizActivity.this, "wrong", Toast.LENGTH_SHORT).show();
+                        updateQuestion();
+                    }
                 }
-            }
-        });
+            });
 
-        //End of Button Listener for Button3
+            //End of Button Listener for Button3
+        }
 
+        catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
 
@@ -118,13 +140,25 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     private void updateQuestion(){
-        mQuestionView.setText(mQuestionLibrary.getQuestion(mQuestionNumber));
-        mButtonChoice1.setText(mQuestionLibrary.getChoice1(mQuestionNumber));
-        mButtonChoice2.setText(mQuestionLibrary.getChoice2(mQuestionNumber));
-        mButtonChoice3.setText(mQuestionLibrary.getChoice3(mQuestionNumber));
 
-        mAnswer = mQuestionLibrary.getCorrectAnswer(mQuestionNumber);
-        mQuestionNumber++;
+        if (mQuestionNumber < 4) {
+
+            mQuestionView.setText(mQuestionLibrary.getQuestion(mQuestionNumber));
+            mButtonChoice1.setText(mQuestionLibrary.getChoice1(mQuestionNumber));
+            mButtonChoice2.setText(mQuestionLibrary.getChoice2(mQuestionNumber));
+            mButtonChoice3.setText(mQuestionLibrary.getChoice3(mQuestionNumber));
+
+            mAnswer = mQuestionLibrary.getCorrectAnswer(mQuestionNumber);
+            mQuestionNumber++;
+        }
+
+        else {
+
+            Intent intent = new Intent(getApplicationContext(),ScorePage.class);
+            intent.putExtra("score",mScore);
+            startActivity(intent);
+
+        }
     }
 
 

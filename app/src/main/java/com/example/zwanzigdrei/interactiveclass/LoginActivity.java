@@ -18,7 +18,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Bundle bundle = new Bundle();
+    public static Bundle bundle = new Bundle();
 
     private EditText Username;
     private EditText Password;
@@ -29,16 +29,17 @@ public class LoginActivity extends AppCompatActivity {
     private static DatabaseReference fbRank;
 
     private static String dataRank;
+    private static String dataStudentID;
 
     public static final String MY_PREF = "MyPref";
     public static final String KEY = "Username";
-
-    //private int counter = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        bundle = new Bundle();
 
         Username = findViewById(R.id.etUsername);
         Password = findViewById(R.id.etPassword);
@@ -59,13 +60,24 @@ public class LoginActivity extends AppCompatActivity {
         fbPassword = FirebaseDatabase.getInstance().getReference().child("Users").child(username.toString()).child("Password");
         fbRank = FirebaseDatabase.getInstance().getReference().child("Users").child(username.toString()).child("Rank");
 
-        //final String[] dataRank = new String[1];
         fbRank.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 dataRank = dataSnapshot.getValue().toString();
                 bundle.putString("rank",dataRank); // store rank into bundle to move across intent
-                bundle.putString("username", fbstudentID.toString()); // store username into bundle to move across intent
+                bundle.putString("studentID",Username.getText().toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+        fbstudentID.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                dataStudentID = dataSnapshot.getValue().toString();
+                bundle.putString("studentID",Username.getText().toString()); // store id into bundle to move across intent
             }
 
             @Override
@@ -82,9 +94,10 @@ public class LoginActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString(KEY, username);
                     editor.apply();
+
+                    // Move to next screen (MainActivity)
                     Intent mainInt = new Intent(LoginActivity.this, MainActivity.class);
                     mainInt.putExtras(bundle);
-
                     if (dataRank.equals("teacher")) {
                         Toast.makeText(LoginActivity.this, "TEACHER LOGIN", Toast.LENGTH_SHORT).show();
                         startActivity(mainInt);

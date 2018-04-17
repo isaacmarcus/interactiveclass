@@ -1,4 +1,4 @@
-package mynamechef.dropboxtest;
+package com.example.zwanzigdrei.interactiveclass;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -54,7 +54,7 @@ public class WeekSelectionActivity extends AppCompatActivity {
         week1Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToCohortSelection("week","week1");
+                goToCohortSelection("week","Week 1");
 
             }
         });
@@ -62,7 +62,7 @@ public class WeekSelectionActivity extends AppCompatActivity {
         week2Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToCohortSelection("week","week2");
+                goToCohortSelection("week","Week 2");
 
             }
         });
@@ -70,7 +70,7 @@ public class WeekSelectionActivity extends AppCompatActivity {
         week3Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToCohortSelection("week","week3");
+                goToCohortSelection("week","Week 3");
 
             }
         });
@@ -78,7 +78,7 @@ public class WeekSelectionActivity extends AppCompatActivity {
         week4Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToCohortSelection("week","week4");
+                goToCohortSelection("week","Week 4");
 
             }
         });
@@ -86,7 +86,7 @@ public class WeekSelectionActivity extends AppCompatActivity {
         week5Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToCohortSelection("week","week5");
+                goToCohortSelection("week","Week 5");
 
             }
         });
@@ -94,7 +94,7 @@ public class WeekSelectionActivity extends AppCompatActivity {
         week6Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToCohortSelection("week","week6");
+                goToCohortSelection("week","Week 6");
 
             }
         });
@@ -102,7 +102,7 @@ public class WeekSelectionActivity extends AppCompatActivity {
         week7Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToCohortSelection("week","week7");
+                goToCohortSelection("week","Week 7");
 
             }
         });
@@ -110,7 +110,7 @@ public class WeekSelectionActivity extends AppCompatActivity {
         week8Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToCohortSelection("week","week8");
+                goToCohortSelection("week","Week 8");
 
             }
         });
@@ -118,7 +118,7 @@ public class WeekSelectionActivity extends AppCompatActivity {
         week9Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToCohortSelection("week","week9");
+                goToCohortSelection("week","Week 9");
 
             }
         });
@@ -126,7 +126,7 @@ public class WeekSelectionActivity extends AppCompatActivity {
         week10Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToCohortSelection("week","week10");
+                goToCohortSelection("week","Week 10");
 
             }
         });
@@ -134,7 +134,7 @@ public class WeekSelectionActivity extends AppCompatActivity {
         week11Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToCohortSelection("week","week11");
+                goToCohortSelection("week","Week 11");
 
             }
         });
@@ -142,7 +142,7 @@ public class WeekSelectionActivity extends AppCompatActivity {
         week12Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToCohortSelection("week","week12");
+                goToCohortSelection("week","Week 12");
 
             }
         });
@@ -150,7 +150,7 @@ public class WeekSelectionActivity extends AppCompatActivity {
         week13Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToCohortSelection("week","week13");
+                goToCohortSelection("week","Week 13");
 
             }
         });
@@ -158,7 +158,7 @@ public class WeekSelectionActivity extends AppCompatActivity {
         week14Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToCohortSelection("week","week14");
+                goToCohortSelection("week","Week 14");
 
             }
         });

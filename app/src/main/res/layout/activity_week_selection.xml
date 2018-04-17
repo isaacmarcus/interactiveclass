@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="mynamechef.dropboxtest.WeekSelectionActivity">
+    android:background="@drawable/blackwood"
+    tools:context="com.example.zwanzigdrei.interactiveclass.WeekSelectionActivity">
 
     <ScrollView
         android:layout_width="match_parent"

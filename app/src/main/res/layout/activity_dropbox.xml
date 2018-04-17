@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="mynamechef.dropboxtest.DropBoxActivity">
+    android:background="@drawable/blackwood"
+    tools:context="com.example.zwanzigdrei.interactiveclass.DropBoxActivity">
 
     <Button
         android:id="@+id/upload"
@@ -14,17 +15,8 @@
         android:layout_marginTop="100dp"
         android:text="Upload Slides"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/download"
-        android:layout_width="176dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="104dp"
-        android:layout_marginTop="16dp"
-        android:text="Download Slides"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/uploadapp" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="104dp" />
 
     <Button
         android:id="@+id/uploadapp"
@@ -34,17 +26,19 @@
         android:layout_marginTop="16dp"
         android:text="Upload From selected App"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/upload" />
+        app:layout_constraintTop_toBottomOf="@+id/upload"
+        android:layout_marginLeft="104dp" />
 
     <Button
         android:id="@+id/button20"
         android:layout_width="174dp"
-        android:layout_height="42dp"
+        android:layout_height="51dp"
         android:layout_marginStart="104dp"
         android:layout_marginTop="16dp"
-        android:text="Test"
+        android:text="View Weeks"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/download" />
+        app:layout_constraintTop_toBottomOf="@+id/uploadapp"
+        android:layout_marginLeft="104dp" />
 
 
 </android.support.constraint.ConstraintLayout>

@@ -1,8 +1,8 @@
-package com.example.mengyuan.multiplechoice;
+package com.example.zwanzigdrei.interactiveclass;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -30,10 +30,20 @@ public class ScorePage extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ScorePage.this, QuizSubjectActivity.class));
+                Intent i = new Intent(ScorePage.this, MainActivity.class);
+                i.putExtras(LoginActivity.bundle);
+                startActivity(i);
             }
         });
 
 
+    }
+
+    //logout on back pressed
+    @Override
+    public void onBackPressed(){
+        Intent i = new Intent(ScorePage.this, MainActivity.class);
+        i.putExtras(LoginActivity.bundle);
+        startActivity(i);
     }
 }

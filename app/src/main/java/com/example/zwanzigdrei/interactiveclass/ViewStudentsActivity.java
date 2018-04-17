@@ -1,10 +1,7 @@
 package com.example.zwanzigdrei.interactiveclass;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.icu.text.AlphabeticIndex;
 import android.os.Handler;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Context;
@@ -30,10 +27,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class CourseActivity extends AppCompatActivity {
+public class ViewStudentsActivity extends AppCompatActivity {
 
     // Get a reference to the database service
-    private DatabaseReference dataCourse= FirebaseDatabase.getInstance().getReference().child("Subjects").child("Computer Systems Engineering").child("Week 1");
+    private DatabaseReference dataCourse;
     private DatabaseReference stddataRef;
 
     private ArrayList<String> data = new ArrayList<>();
@@ -43,35 +40,28 @@ public class CourseActivity extends AppCompatActivity {
     private boolean mRunning = true;
     private Handler mHandler = new Handler();
 
+    private Intent intent;
+    private String week;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_course);
+        setContentView(R.layout.activity_viewstudents);
+
+        intent = getIntent();
+        week = intent.getStringExtra("week");
+
+        // intent to get data of what week we are in
+        dataCourse = FirebaseDatabase.getInstance().getReference().child("Subjects").child("Computer Systems Engineering").child(week);
+
         ListView lv = findViewById(R.id.listview);
 
         generateListContent();
         myAdapter = new MyListAdaper(this, R.layout.list_item, data);
 
         lv.setAdapter(myAdapter);
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(CourseActivity.this, "List item was clicked at " + position, Toast.LENGTH_SHORT).show();
-            }
-        });
-
         mUpdater.run();
-
-        Button uploadBtn = findViewById(R.id.btnUpload);
-
-        uploadBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(CourseActivity.this, UploadActivity.class);
-                startActivity(i);
-            }
-        });
 
     }
 
@@ -112,11 +102,10 @@ public class CourseActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Iterator<DataSnapshot> users = dataSnapshot.getChildren().iterator();
-                Toast.makeText(CourseActivity.this, "Total Users: " + dataSnapshot.getChildrenCount(), Toast.LENGTH_SHORT).show();
                 while (users.hasNext()) {
                     DataSnapshot user = users.next();
                     String userID = user.child("studentID").getValue().toString();
-                    //Toast.makeText(CourseActivity.this, "userid: "+userID, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(ViewStudentsActivity.this, "userid: "+userID, Toast.LENGTH_SHORT).show();
                     data.add("" + userID);
                 }
             }
@@ -174,18 +163,20 @@ public class CourseActivity extends AppCompatActivity {
                 convertView.setTag(viewHolder);
             }
             mainViewholder = (ViewHolder) convertView.getTag();
+            mainViewholder.title.setText(getItem(position));
+
             mainViewholder.button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     // create intent to move to record activity
-                    Intent recordInt = new Intent(CourseActivity.this, RecordActivity.class);
-                    //mainInt.putExtras(bundle);
+                    Intent recordInt = new Intent(ViewStudentsActivity.this, RecordActivity.class);
+//                    Toast.makeText(ViewStudentsActivity.this, getItem(position), Toast.LENGTH_SHORT).show();
+                    recordInt.putExtra("studentID",getItem(position));
+                    recordInt.putExtra("week",week);
                     startActivity(recordInt);
 
                 }
             });
-            mainViewholder.title.setText(getItem(position));
 
             return convertView;
         }
@@ -194,31 +185,6 @@ public class CourseActivity extends AppCompatActivity {
         TextView title;
         Button button;
     }
-
-//    ArrayList<String> recordList;
-
-//    public void displayRecords(String studentID) {
-//        recordList = new ArrayList<>();
-//        stddataRef = FirebaseDatabase.getInstance().getReference().child("Computer System Engineering").child("Week 1").child(studentID);
-//        stddataRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                Iterator<DataSnapshot> records = dataSnapshot.getChildren().iterator();
-//                while (records.hasNext()) {
-//                    DataSnapshot record = records.next();
-//                    String recordVal = record.getKey() + ": " + record.getValue().toString();
-//                    //Toast.makeText(CourseActivity.this, recordVal, Toast.LENGTH_SHORT).show();
-//                    recordList.add(recordVal);
-//                    message += recordVal +"\n";
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-//    }
 
 
 }

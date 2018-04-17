@@ -1,9 +1,9 @@
-package com.example.mengyuan.multiplechoice;
+package com.example.zwanzigdrei.interactiveclass;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -13,7 +13,7 @@ import java.io.File;
 public class QuizSubjectActivity extends AppCompatActivity {
 
     //change this to what you named your txt files
-    String scienceString = "filequestion.txt";
+    String scienceString = "sciencequestion.txt";
     String mathematicsString = "mathematicsquestion.txt";
     String englishString = "englishquestion.txt";
 
@@ -25,7 +25,7 @@ public class QuizSubjectActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_quizsubject);
 
         scienceButton = findViewById(R.id.scienceButton);
         mathematicsButton = findViewById(R.id.mathematicsButton);

@@ -7,12 +7,11 @@
     android:id="@+id/fragment_account"
     tools:context="com.example.zwanzigdrei.interactiveclass.MainFragment">
 
-
     <TextView
-        android:id="@+id/name"
+        android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Name: "
+        android:text="PROFILE"
         android:textSize="25sp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
@@ -29,42 +28,20 @@
         android:text="StudentID: "
         android:textColor="@color/white"
         android:textSize="25sp"
-        android:layout_below="@+id/name"
+        android:layout_below="@+id/title"
         />
 
     <TextView
-        android:id="@+id/grade"
+        android:id="@+id/rank"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Grade: "
-        android:textSize="25sp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Rank: "
         android:textColor="@color/white"
-        android:layout_below="@+id/studentid"/>
-    <TextView
-        android:id="@+id/attendance"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Attendance: "
         android:textSize="25sp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:textColor="@color/white"
-        android:layout_below="@+id/grade"/>
-
-    <TextView
-        android:id="@+id/performance"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Performance: "
-        android:textSize="25sp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:textColor="@color/white"
-        android:layout_below="@+id/attendance"/>
+        android:layout_below="@+id/studentid"
+        />
 
 </RelativeLayout>

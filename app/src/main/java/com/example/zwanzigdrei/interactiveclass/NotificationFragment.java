@@ -14,6 +14,7 @@ import android.widget.Button;
 
 public class NotificationFragment extends Fragment {
 
+
     public NotificationFragment() {
         // Required empty public constructor
     }
@@ -29,13 +30,15 @@ public class NotificationFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_notifications,container,false);
 
+
+
         Button btnquiz = view.findViewById(R.id.btnQuiz);
 
         btnquiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent();
-                i.setClass(getActivity(),QuizActivity.class);
+                i.setClass(getActivity(),QuizSubjectActivity.class);
                 getActivity().startActivity(i);
             }
         });

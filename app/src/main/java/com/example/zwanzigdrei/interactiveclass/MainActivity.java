@@ -18,18 +18,11 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    String username;
-    String rank;
-    Bundle bundle;
+    private String username;
+    private String rank;
+    private Bundle bundle;
 
-    private TextView mTextMessage;
-    private FirebaseDatabase database;
-    Button snoopButton;
-    //User user;
-    String uid;
-    String user_type;
-    //ArrayList<Subject> subjects = new ArrayList<>();
-    BottomNavigationView bottomNavigationView;
+    private BottomNavigationView bottomNavigationView;
     private static final String SELECTED_ITEM = "arg_selected_item";
     private int mSelectedItem;
 
@@ -52,9 +45,11 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.navigation_dashboard:
                 frag = new CoursesFragment();
+                frag.setArguments(bundle);
                 break;
             case R.id.navigation_notifications:
                 frag = new NotificationFragment();
+                frag.setArguments(bundle);
                 break;
         }
 
@@ -88,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         rank = bundle.getString("rank");
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_student);
+        setContentView(R.layout.activity_main);
         bottomNavigationView = findViewById(R.id.navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         bottomNavigationView.setSelectedItemId(R.id.navigation_home);
@@ -104,6 +99,18 @@ public class MainActivity extends AppCompatActivity {
         }
         selectFragment(selectedItem);
 
+    }
+
+    // Resume
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    // Pause
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 
     //logout on back pressed

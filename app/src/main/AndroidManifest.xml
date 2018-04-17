@@ -29,9 +29,15 @@
         </activity>
         <activity android:name=".StudentActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".CourseActivity"/>
+        <activity android:name=".ViewStudentsActivity"/>
+        <activity android:name=".RecordActivity"/>
         <activity android:name=".QuizActivity"/>
-        <activity android:name=".UploadActivity"></activity>
+        <activity android:name=".DropBoxActivity"/>
+        <activity android:name=".CohortSelectionActivity"/>
+        <activity android:name=".PDFviewActivity"/>
+        <activity android:name=".WeekSelectionActivity"/>
+        <activity android:name=".QuizSubjectActivity"/>
+        <activity android:name=".ScorePage"/>
     </application>
 
 </manifest>
